@@ -1,0 +1,14 @@
+13
+minus(a(x,mult(b,baz(f(a,baz),x(plus(a,baz),a)))),minus(y,baz(x(minus(plus(b,mult(f,x)),pow(minus(y(mult,a),baz),mult)),y),b(plus(f(a,plus),a(x(a,y(pow(x,baz),pow)),plus)),baz))))
+mult(plus,x)
+f
+plus
+plus(a(x,x(x(x,x),pow(f,minus))),f)
+plus(a,y)
+baz(a,f(b,pow(f,minus(minus,plus))))
+a(b(b,b(y(x(pow(plus,baz),x(x,plus(plus,y(x,pow)))),a),y)),plus)
+f(b(pow,baz(y,minus)),x(x(plus(mult,baz(plus,mult(minus(y(y(y(a(pow,b),mult),x(minus,f)),plus),f(f(baz(x(x,minus),baz(a,baz)),y(minus(y(minus(plus,baz),pow),a),f(y,b))),y)),mult(f(f(baz,minus(baz(a(x,f(minus,a)),mult(mult,mult(x(baz(y(x(y(minus,b(plus,b(x,mult))),f(y,y)),minus),minus),minus),y))),x(pow(f,minus),mult(f(minus,minus(b(minus,y),minus(y,y))),x(pow(a,plus),minus))))),plus),b(a,mult))))),b),mult))
+plus(x(a,f(pow(y(a(minus(a(plus,plus),b(f(plus,x(x(b,baz),b(mult,minus))),pow)),baz(f(baz,f(plus,plus(minus,plus(plus(minus(mult,mult),mult),mult)))),mult)),a),b),baz(plus,plus))),x(x,f(plus(plus,x),baz)))
+b(pow(pow,x(pow,plus)),b)
+b(mult(mult(mult,y(plus(mult,pow(minus(pow,a),plus(pow,baz(b(plus,plus),minus(f,x(minus(f(baz(a(baz(a(a,f),mult(pow,minus)),a(f,pow)),y),minus(minus(f(f,f(y,x(mult,plus))),x),baz(a,b))),b),f)))))),pow)),plus(b,a)),a(b,b))
+b(x(a(b,f(plus,b)),f(baz,mult(x(plus(minus,baz(minus(mult,a(f(mult(mult(minus,f),x(a(pow,pow),mult)),baz),plus)),plus(a(b(y(pow(pow,a(y,b(x(mult(baz(minus,pow(a(x,a(b,y(f(x,plus),a))),minus(f,f))),plus),b),x(minus(y(y(y(minus(y(x(y(a,minus),baz),pow),x(f,baz(b,b))),a),a(a,x(y,b))),f),plus(x(a(y,plus(b,plus)),mult(y(b(pow,plus(f(a,y(mult(baz(minus(baz,baz),pow(b,pow(minus(b,mult),b(minus,baz)))),baz(f(a,minus),plus(minus(pow,minus),plus))),pow(b,b))),baz)),mult),minus(x(b(x,plus),x(minus,f)),b(x(x,x),a(pow,plus(baz(f,f(a(x,baz(minus,plus)),mult)),plus)))))),baz(minus,pow(b(plus,baz(pow,minus)),mult(mult,a(a(plus(minus(baz(pow,y),x),y(x(a(y,mult),b(baz,b)),minus)),y(y(minus(mult,b(minus,minus(f(pow(minus,plus),a),y))),y(minus(y,minus(plus,y(a(f,f),f(minus(a,pow(b(pow(pow,baz(minus,b(pow(baz,minus),a))),plus(pow(pow(plus,minus),baz),pow)),plus(baz,a))),x)))),b)),f)),x)))))),mult)))),f(plus,f(y,baz))),y(plus,a)),y),plus))),b),a))),minus(x(plus,y),minus(x(b,y(mult,a(b(f(plus(baz(baz(mult,baz(a,b)),a(mult,mult)),y(minus(f,pow),plus)),b(baz,baz)),plus(baz,baz(a(b,pow(a,b(baz,a(a(pow,pow(b,baz(f,plus(baz,mult)))),baz(a(x(plus(a(a,pow(baz(minus,plus),b(minus,b(f,b(minus(y(mult,pow(x(pow(pow,x(pow,f)),f),f(minus,b(plus(a,y(minus,minus)),f(mult,a(b(plus,x),b(pow,y))))))),y(mult,baz)),pow(x(x,minus(y(a,mult),mult(mult,plus))),f(pow(baz,plus(y,x(minus,minus))),y))))))),minus),x),y(f(b(plus(pow(plus(plus(pow(x(pow,pow),f),f),y),pow),baz(y(plus,minus(pow,b)),f)),a),x(plus,minus)),mult(minus,pow(x,baz)))),plus(plus(mult,f(mult,y)),y)))))),b(x,b)))),pow))),mult(pow(f(mult,b(a(x,f(mult,mult)),f(minus,minus))),baz),x))))
