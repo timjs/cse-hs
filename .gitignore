@@ -1,1 +1,6 @@
 references
+solution
+
+*.o
+*.hi
+*.swp
