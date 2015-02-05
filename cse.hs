@@ -3,20 +3,19 @@ module Main where
 
 import GHC.Generics (Generic)
 
--- import Data.Attoparsec.ByteString.Char8
 import Data.Hashable (Hashable)
 import Data.Monoid ((<>))
+import Data.Char (isLetter)
 
-import qualified Data.ByteString.Char8   as BS
-import qualified Data.ByteString.Builder as BD
-import qualified Data.HashMap.Lazy       as HM
+import qualified Data.Attoparsec.ByteString.Char8 as AT
+import qualified Data.ByteString.Char8            as BS
+import qualified Data.ByteString.Builder          as BD
+import qualified Data.HashMap.Lazy                as HM
 
-import Control.Applicative
-import Control.Monad
+import Control.Applicative (Applicative(..),Alternative(..),(<$>))
+import Control.Monad (replicateM)
 
 import System.IO (stdout)
-
-import Parser
 
 -- Expressions --
 
@@ -29,7 +28,7 @@ type Name = BS.ByteString
 
 instance Hashable Expr
 
--- Helpers --
+-- Builder --
 
 class Buildable a where
   build :: a -> BD.Builder
@@ -45,14 +44,17 @@ putBuildLn a = BD.hPutBuilder stdout $ build a <> BD.word8 10
 
 -- Parser --
 
-comma, open, close :: Parser Char
-comma = char ','
-open  = char '('
-close = char ')'
+name :: AT.Parser BS.ByteString
+name = AT.takeWhile isLetter
 
-expr :: Parser Expr
-expr  =  App <$> word <* open <*> expr <* comma <*> expr <* close
-     <|> Var <$> word
+comma, open, close :: AT.Parser Char
+comma = AT.char ','
+open  = AT.char '('
+close = AT.char ')'
+
+expr :: AT.Parser Expr
+expr  =  App <$> name <* open <*> expr <* comma <*> expr <* close
+     <|> Var <$> name
 
 -- Elimination --
 
@@ -66,19 +68,18 @@ cse st@(i,m) e = case HM.lookup e m of
   Just i'  -> (st, Sub i')
   Nothing -> case e of
     App n l r -> (str, App n l' r')
-      where st'      = (i+1, HM.insert e i m)
-            (stl,l') = cse st' l
+      where (stl,l') = cse st' l
             (str,r') = cse stl r
     Var _     -> (st', e)
-      where st'      = (i+1, HM.insert e i m)
     Sub _     -> error "this can't happen"
+    where st' = (i+1, HM.insert e i m)
 
 -- Main --
 
 run :: IO ()
 run = do
   l <- BS.getLine
-  case parseOnly expr l of
+  case AT.parseOnly expr l of
     Left  e -> error e
     Right x -> putBuildLn . snd $ cse mkState x
 
