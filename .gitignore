@@ -1,6 +1,3 @@
-references
-solution
+resources/
+dist/
 
-*.o
-*.hi
-*.swp

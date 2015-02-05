@@ -1,0 +1,5 @@
+plus(b,b(pow,mult))
+minus(minus,b(x,b))
+f(pow(plus,f),3)
+mult(x,b(pow,mult))
+minus(minus(x,3),b)

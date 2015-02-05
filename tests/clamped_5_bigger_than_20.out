@@ -1,0 +1,5 @@
+f(baz,plus(x(baz(a,mult),plus(f,b)),baz(plus,6)))
+minus(f(baz(minus,pow),plus),y(f,f(a(a,8),mult)))
+plus(y(y(b,x(a,f(pow,4))),x(mult(x,8),y)),plus)
+b(a(pow(pow(y,x),baz),b(7,mult)),f(a,b(11,7)))
+baz(baz,mult(pow(f,a),f(plus(mult,9),y(5,x))))
