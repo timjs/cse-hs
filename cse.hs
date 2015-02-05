@@ -3,9 +3,9 @@ module Main where
 
 import GHC.Generics (Generic)
 
+import Data.Char (isLetter)
 import Data.Hashable (Hashable)
 import Data.Monoid ((<>))
-import Data.Char (isLetter)
 
 import qualified Data.Attoparsec.ByteString.Char8 as AT
 import qualified Data.ByteString.Char8            as BS
@@ -20,10 +20,10 @@ import System.IO (stdout)
 -- Expressions --
 
 data Expr = Var Name
-          | Sub Ref
+          | Sub Repl
           | App Name Expr Expr
           deriving (Eq,Generic)
-type Ref  = Int
+type Repl = Int
 type Name = BS.ByteString
 
 instance Hashable Expr
@@ -58,7 +58,7 @@ expr  =  App <$> name <* open <*> expr <* comma <*> expr <* close
 
 -- Elimination --
 
-type State = (Ref, HM.HashMap Expr Ref)
+type State = (Repl, HM.HashMap Expr Repl)
 
 mkState :: State
 mkState = (1, HM.empty)
