@@ -1,10 +1,8 @@
-{-# LANGUAGE OverloadedStrings, DeriveGeneric #-}
+{-# LANGUAGE OverloadedStrings #-}
 module Main where
 
-import GHC.Generics (Generic)
-
 import Data.Char (isLetter)
-import Data.Hashable (Hashable)
+import Data.Hashable (Hashable(..))
 import Data.Monoid ((<>))
 
 import qualified Data.Attoparsec.ByteString.Char8 as AT
@@ -19,14 +17,27 @@ import System.IO (stdout)
 
 -- Expressions --
 
-data Expr = Var Name
+data Expr = App Hash Name Expr Expr
+          | Var Hash Name
           | Sub Repl
-          | App Name Expr Expr
-          deriving (Eq,Generic)
+          deriving (Eq)
 type Repl = Int
 type Name = BS.ByteString
+type Hash = Int
 
-instance Hashable Expr
+instance Hashable Expr where
+  hashWithSalt _ e = case e of
+    App h _ _ _ -> h
+    Var h _     -> h
+    Sub _       -> undefined
+
+mkApp :: Name -> Expr -> Expr -> Expr
+mkApp n l r = App h n l r
+  where h = hash n `hashWithSalt` hash l `hashWithSalt` hash r
+
+mkVar :: Name -> Expr
+mkVar n = Var h n
+  where h = hash n
 
 -- Builder --
 
@@ -35,9 +46,9 @@ class Buildable a where
 
 instance Buildable Expr where
   build e = case e of
-    Var n     -> BD.byteString n
-    Sub r     -> BD.intDec r
-    App n l r -> BD.byteString n <> "(" <> build l <> "," <> build r <> ")"
+    App _ n l r -> BD.byteString n <> "(" <> build l <> "," <> build r <> ")"
+    Var _ n     -> BD.byteString n
+    Sub r       -> BD.intDec r
    
 putBuildLn :: Buildable a => a -> IO ()
 putBuildLn a = BD.hPutBuilder stdout $ build a <> BD.word8 10
@@ -53,8 +64,8 @@ open  = AT.char '('
 close = AT.char ')'
 
 expr :: AT.Parser Expr
-expr  =  App <$> name <* open <*> expr <* comma <*> expr <* close
-     <|> Var <$> name
+expr  =  mkApp <$> name <* open <*> expr <* comma <*> expr <* close
+     <|> mkVar <$> name
 
 -- Elimination --
 
@@ -67,11 +78,11 @@ cse :: State -> Expr -> (State,Expr)
 cse st@(i,m) e = case HM.lookup e m of
   Just i'  -> (st, Sub i')
   Nothing -> case e of
-    App n l r -> (str, App n l' r')
+    App h n l r -> (str, App h n l' r') -- leave hash as is!
       where (stl,l') = cse st' l
             (str,r') = cse stl r
-    Var _     -> (st', e)
-    Sub _     -> error "this can't happen"
+    Var _ _   -> (st', e)
+    Sub _     -> undefined
     where st' = (i+1, HM.insert e i m)
 
 -- Main --
